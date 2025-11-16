@@ -17,7 +17,11 @@
             <Menu x:Name="mimenu">
                 <MenuItem x:Name="menuArchivo" Header="_Archivo">
                     <MenuItem Header="Abrir"
-                          Click="Abrir_Click"/>
+                          Click="Abrir_Click">
+                        <MenuItem.Icon>
+                            <Image x:Name="menuAbrir"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Header="Salir"
                           Click="Salir_Click">
@@ -29,32 +33,37 @@
                 <MenuItem x:Name="menuFuente" Header="_Fuente">
                     <MenuItem Header="_Negrita" IsCheckable="True"
                         Checked="Negrita_Checked"
-                        Unchecked="Negrita_Unchecked"/>
+                        Unchecked="Negrita_Unchecked">
+                        <MenuItem.Icon>
+                            <Image x:Name="menuNegrita"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="_Cursiva" IsCheckable="True"
                         Checked="Cursiva_Checked"
-                        Unchecked="Cursiva_Unchecked"/>
+                        Unchecked="Cursiva_Unchecked">
+                            <MenuItem.Icon>
+                                <Image x:Name="menuCursiva"/>
+                            </MenuItem.Icon>
+                     </MenuItem>
                 </MenuItem>
-                <MenuItem x:Name="menuFiltros" Header="_Filtros">
-                    <MenuItem Header="_Negrita" IsCheckable="True"
-                        Checked="Negrita_Checked"
-                        Unchecked="Negrita_Unchecked"/>
-                    <MenuItem Header="_Cursiva" IsCheckable="True"
-                        Checked="Cursiva_Checked"
-                        Unchecked="Cursiva_Unchecked"/>
+                <MenuItem x:Name="menuFiltros" Header="F_iltros">
+                    <MenuItem Header="Edad mayor de 35 (nombre, apellidos, edad y materia)"/>
+                    <MenuItem Header="Año Ingreso igual o superior a 2010 (todo)"/>
+                    <MenuItem Header="Año Ingreso igual o superior a 2010 y Estado Civil es casado (nombre, apellidos, años y e.civil)"/>
+                    <MenuItem Header="Estatura superior a 160 y ordenados por Estatura descendente y Peso descendente (nombre, apellidos, edad, estatura)"/>
                 </MenuItem>
-                <MenuItem x:Name="menuAgrupacion" Header="_Agrupacion">
-                    <MenuItem Header="_Negrita" IsCheckable="True"
-                        Checked="Negrita_Checked"
-                        Unchecked="Negrita_Unchecked"/>
-                    <MenuItem Header="_Cursiva" IsCheckable="True"
-                        Checked="Cursiva_Checked"
-                        Unchecked="Cursiva_Unchecked"/>
+                <MenuItem x:Name="menuAgrupacion" Header="A_grupacion">
+                    <MenuItem Header="Agrupar por E.Civil y mostrar nombre, apellidos, edad, peso y estatura"/>
+                    <MenuItem Header="Agrupar por E.Civil y mostrar cuántos hay en cada grupo"/>
+                    <MenuItem Header="Agrupar por Rangos de Edad, orden descendente por Edad y mostrar nombre, apellidos, email"/>
+                    <MenuItem Header="Agrupar por Seguro Médico, cuando la edad es igual o superior a 40, orden peso 
+              y apellidos (nombre, apellidos, seguro, peso)"/>
                 </MenuItem>
                 
             </Menu>
         </StackPanel>
 
-        <Grid Margin="8,8,8,8">
+        <Grid x:Name="gridCent" Margin="8,8,8,8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="91*"/>
@@ -62,34 +71,146 @@
                 <RowDefinition Height="87*"/>
                 <RowDefinition Height="107*"/>
             </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="19*"/>
-                <ColumnDefinition Width="15*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Grid Margin="8,8,8,8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="91*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="87*"/>
-                <RowDefinition Height="107*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="19*"/>
                 <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
             
+            
+            
+            <!-- Fila 1-->
+            
+            <!--Columna 0 -->
+            <Label VerticalAlignment="Bottom" Margin="0,0,0,0" Name="lblNombre" Grid.Row="1" Grid.Column="0" Content="Nombre:"/>
+            <Label VerticalAlignment="Bottom" Margin="0,0,0,35" Name="lblApellidos" Grid.Row="1" Grid.Column="0" Content="Apellidos:"/>
+            
+            <!--Columna 1 -->
+            <TextBox x:Name="txtNombre" 
+                      VerticalAlignment="Bottom" Margin="0,0,0,40" 
+                      Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                      HorizontalAlignment="Left" 
+                      Width="90" />
+            <TextBox x:Name="txtApellidos" 
+                      VerticalAlignment="Bottom" Margin="0,0,0,5" 
+                      Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                      HorizontalAlignment="Left" 
+                      Width="200" />
+
+            <!--Columna 3 -->
+            <Label Name="lblEmail" Content="Email:"
+                   Grid.Row="1" Grid.Column="3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="txtEmail" Margin="10,0,0,0"
+         VerticalAlignment="Center" HorizontalAlignment="Center"
+         Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
+         Width="100" />
+
+            <CheckBox x:Name="chkDestino" 
+                      Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
+                      HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                      Margin="20,0,0,30" Content="Destino Definitivo"/>
+            
+            <!--Columna 6-->
+            <Image x:Name="imgFoto" 
+                   Grid.Column="6" Grid.Row="1" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   Height="Auto" Width="Auto"
+                   Grid.ColumnSpan="2" Grid.RowSpan="2" 
+                   Margin="0,20,10,20"/>
+            <!-- Fila 3 -->
+
+            <!--Columna 0 -->
+            <Label Margin="0,5,0,0" Name="lblEdad" Grid.Row="3" Grid.Column="0" Content="Edad:"/>
+
+            <!--Columna 1 -->
+            <ComboBox x:Name="cmbEdad" 
+                      VerticalAlignment="Top" HorizontalAlignment="Left"
+                      Margin="0,5,0,0" 
+                      Grid.Row="3" Grid.Column="1"  
+                      Width="40"/>
+
+            <!--Columna 2 -->
+            <Label  Name="lblAnioIngreso" 
+                    VerticalAlignment="top" HorizontalAlignment="Left" 
+                    Grid.Row="3" Grid.Column="2" 
+                    Content="Año Ingreso:"/>
+            <!--Columna 3 -->
+            <TextBox x:Name="txtAnioIngreso" 
+                     VerticalAlignment="Top" Margin="0,5,0,0" 
+                     Grid.Row="3" Grid.Column="3"
+                     HorizontalAlignment="Left" 
+                     Width="60" />
+            <StackPanel  x:Name="stkTipo" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Width="auto" Margin="10,0,0,0"
+                        Height="auto">
+                <Label Name="lblTipoFuncionario"
+                       Content="Tipo funcionario:"/>
+                <RadioButton x:Name="rbEnPracticas" GroupName="TipoFuncionario" Content="En Prácticas"/>
+                <RadioButton x:Name="rbDeCarrera" GroupName="TipoFuncionario" Content="De Carrera"/>
+        
+
+            </StackPanel>
+            <!--Columna 5-->
+            <Label Name="lblSegMedico" Content="S.Medico:"
+                   Grid.Row="3" Grid.Column="5"/>
+            <!--Columna 6-->
+            <ListBox x:Name="lsbSegMedico" 
+                     VerticalAlignment="Top" HorizontalAlignment="Center"
+                     Margin="0,5,0,0" 
+                     Grid.Row="3" Grid.Column="6"
+                     Width="80" Height="50" >
+                <ListBoxItem Content="S.Social"/>
+                <ListBoxItem Content="Muface"/>
+            </ListBox>
+
+        </Grid>
+
+        <Grid x:Name="gridBtn" Margin="8,8,8,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="91*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="87*"/>
+                <RowDefinition Height="107*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnPrimero" Click="btnPrimero_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="1" Grid.Row="4" Margin="0,11,0,0">
+                <DockPanel>
+                    <Image x:Name="imgPrimero"></Image>
+                </DockPanel>
+            </Button>
+            <Button x:Name="btnAnterior" Click="btnAnterior_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="2" Grid.Row="4" Margin="0,11,0,0">
+                <DockPanel>
+                    <Image x:Name="imgAnterior"></Image>
+                </DockPanel>
+            </Button>
+            <Button x:Name="btnSiguiente" Click="btnSiguiente_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="4" Grid.Row="4" Margin="0,11,0,0">
+                <DockPanel>
+                    <Image x:Name="imgSiguiente"></Image>
+                </DockPanel>
+            </Button>
+            <Button x:Name="btnUtlimo" Click="btnUltimo_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="5" Grid.Row="4" Margin="0,11,0,0">
+                <DockPanel>
+                    <Image x:Name="imgUltimo"></Image>
+                </DockPanel>
+            </Button>
+
         </Grid>
     </Grid>
 </Window>

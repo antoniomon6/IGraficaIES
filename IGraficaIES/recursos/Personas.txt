@@ -1,0 +1,10 @@
+Ana;Garcia Martinez;34;agarcia@trass.com;Matematicas;De Carrera;2015;true;Muface;ana.jpg
+Luis;Fernandez Lopez;28;lfernandez@trass.com;Informatica;En Practicas;2023;false;SS;luis.png
+Carmen;Sanchez Diaz;45;csanchez@trass.com;Lengua;De Carrera;2008;true;Muface;
+Javier;Rodriguez Ruiz;51;jrodriguez@trass.com;Fisica y Quimica;De Carrera;2005;true;Muface;javier.jpg
+Laura;Perez Gomez;30;lperez@trass.com;Ingles;En Practicas;2022;false;SS;
+Miguel;Martin Hernandez;39;mmartin@trass.com;Educacion Fisica;De Carrera;2012;true;SS;miguel.jpg
+Sofia;Jimenez Moreno;42;sjimenez@trass.com;Historia;De Carrera;2010;true;Muface;
+David;Moreno Gil;26;dmoreno@trass.com;Tecnologia;En Practicas;2023;false;SS;david.png
+Elena;Vazquez Romero;48;evazquez@trass.com;Biologia;De Carrera;2007;true;Muface;elena.jpg
+Pablo;Navarro Torres;33;pnavarro@trass.com;Musica;En Practicas;2021;false;SS;
