@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace _2HerenciaSimpleIES
 {
-    internal class ProfesorFuncionario : Profesor, IEmpleadoPublico
+    public class ProfesorFuncionario : Profesor, IEmpleadoPublico
     {
         private int anyoIngresoCuerpo;
         private bool definitivo;

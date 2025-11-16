@@ -10,7 +10,7 @@ namespace IGraficaIES
     {
         Soltero = 1,
         Casado = 2,
-        Divorciado = 2,
+        Divorciado = 3,
         Viudo = 4
     }
     class ProfesorExtendido
@@ -55,14 +55,45 @@ namespace IGraficaIES
             get { return ecivil; }
             set { ecivil = value; }
         }
-        
-        public List<ProfesorExtendido> GetProfesE()
+        public static List<ProfesorExtendido> CrearListaProfesores()
         {
-            //TODO hacer metodo
-            List<ProfesorExtendido> profesorExtendidos = new List<ProfesorExtendido>();
-            return profesorExtendidos;
+
+            List<ProfesorExtendido> listaProfesores = new List<ProfesorExtendido>();
+
+
+            listaProfesores.Add(new ProfesorExtendido(
+               150,  75, "gamaa@trass.com", EstadCivil.Casado));
+
+            listaProfesores.Add(new ProfesorExtendido(
+            165, 82, "felol@trass.com", EstadCivil.Casado));
+
+            listaProfesores.Add(new ProfesorExtendido(
+                160, 68, "sadic@trass.com", EstadCivil.Divorciado));
+
+            listaProfesores.Add(new ProfesorExtendido(
+           172, 70, "roruj@trass.com", EstadCivil.Viudo));
+
+            listaProfesores.Add(new ProfesorExtendido(
+             185, 91, "pegol@trass.com", EstadCivil.Soltero));
+
+            listaProfesores.Add(new ProfesorExtendido(
+            155, 65, "mahem@trass.com", EstadCivil.Casado));
+
+            listaProfesores.Add(new ProfesorExtendido(
+             178, 88, "jimos@trass.com", EstadCivil.Soltero));
+
+            listaProfesores.Add(new ProfesorExtendido(
+           157, 79, "mogid@trass.com", EstadCivil.Viudo));
+
+            listaProfesores.Add(new ProfesorExtendido(
+            185, 85, "varoe@trass.com", EstadCivil.Casado));
+
+            listaProfesores.Add(new ProfesorExtendido(
+                153, 73, "natop@trass.com", EstadCivil.Divorciado));
+
+            return listaProfesores;
         }
-        
+
 
     }
 }

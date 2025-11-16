@@ -1,5 +1,7 @@
 ﻿
 
+using System.Windows.Controls;
+
 namespace _2HerenciaSimpleIES
 {
     public static class ExtensionClass
@@ -17,6 +19,14 @@ namespace _2HerenciaSimpleIES
         public static bool SeekRemove(this List<Persona> list, Persona personaBuscada)
         {
             return list.Remove(personaBuscada);
+        }
+        public static void On(this Button b)
+        {
+            b.IsEnabled = true;
+        }
+        public static void Off(this Button b)
+        {
+            b.IsEnabled = false;
         }
     }
 }

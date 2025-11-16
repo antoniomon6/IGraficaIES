@@ -12,8 +12,8 @@ namespace _2HerenciaSimpleIES
 
         public string RutaFoto
         {
-            get { return RutaFoto; }
-            set { RutaFoto = value; }
+            get { return rutaFoto; }
+            set { rutaFoto = value; }
         }
 
         public int Edad

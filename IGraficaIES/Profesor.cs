@@ -8,7 +8,7 @@ namespace _2HerenciaSimpleIES
         DeCarrera = 3
     }
 
-    internal abstract class Profesor : Persona
+    public abstract class Profesor : Persona
     {
 
 		private string materia;

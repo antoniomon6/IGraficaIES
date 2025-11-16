@@ -47,17 +47,24 @@
                      </MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="menuFiltros" Header="F_iltros">
-                    <MenuItem Header="Edad mayor de 35 (nombre, apellidos, edad y materia)"/>
-                    <MenuItem Header="Año Ingreso igual o superior a 2010 (todo)"/>
-                    <MenuItem Header="Año Ingreso igual o superior a 2010 y Estado Civil es casado (nombre, apellidos, años y e.civil)"/>
-                    <MenuItem Header="Estatura superior a 160 y ordenados por Estatura descendente y Peso descendente (nombre, apellidos, edad, estatura)"/>
+                    <MenuItem Click ="Filtro1_Click" Header="Edad mayor de 35 (nombre, apellidos, edad y materia)"/>
+                    <MenuItem Click ="Filtro2_Click" Header="Año Ingreso igual o superior a 2010 (todo)"/>
+                    <MenuItem Click ="Filtro3_Click" Header="Año Ingreso igual o superior a 2010 y Estado Civil es casado (nombre, apellidos, años y e.civil)"/>
+                    <MenuItem Click ="Filtro4_Click" Header="Estatura superior a 160 y ordenados por Estatura descendente y Peso descendente (nombre, apellidos, edad, estatura)">
+                        <MenuItem.Icon>
+                            <Image x:Name="menuEstatura"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="menuAgrupacion" Header="A_grupacion">
-                    <MenuItem Header="Agrupar por E.Civil y mostrar nombre, apellidos, edad, peso y estatura"/>
-                    <MenuItem Header="Agrupar por E.Civil y mostrar cuántos hay en cada grupo"/>
-                    <MenuItem Header="Agrupar por Rangos de Edad, orden descendente por Edad y mostrar nombre, apellidos, email"/>
-                    <MenuItem Header="Agrupar por Seguro Médico, cuando la edad es igual o superior a 40, orden peso 
-              y apellidos (nombre, apellidos, seguro, peso)"/>
+                    <MenuItem Click ="Agrupacion1_Click" Header="Agrupar por E.Civil y mostrar nombre, apellidos, edad, peso y estatura"/>
+                    <MenuItem Click ="Agrupacion2_Click" Header="Agrupar por E.Civil y mostrar cuántos hay en cada grupo"/>
+                    <MenuItem Click ="Agrupacion3_Click" Header="Agrupar por Rangos de Edad, orden descendente por Edad y mostrar nombre, apellidos, edad"/>
+                    <MenuItem Click ="Agrupacion4_Click" Header="Agrupar por Seguro Médico, cuando la edad es igual o superior a 40, orden peso y apellidos (nombre, apellidos, seguro, peso)">
+                        <MenuItem.Icon>
+                            <Image x:Name="menuMedico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 
             </Menu>
@@ -120,7 +127,7 @@
             <!--Columna 6-->
             <Image x:Name="imgFoto" 
                    Grid.Column="6" Grid.Row="1" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
                    Height="Auto" Width="Auto"
                    Grid.ColumnSpan="2" Grid.RowSpan="2" 
                    Margin="0,20,10,20"/>
@@ -167,8 +174,6 @@
                      Margin="0,5,0,0" 
                      Grid.Row="3" Grid.Column="6"
                      Width="80" Height="50" >
-                <ListBoxItem Content="S.Social"/>
-                <ListBoxItem Content="Muface"/>
             </ListBox>
 
         </Grid>
@@ -205,7 +210,7 @@
                     <Image x:Name="imgSiguiente"></Image>
                 </DockPanel>
             </Button>
-            <Button x:Name="btnUtlimo" Click="btnUltimo_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="5" Grid.Row="4" Margin="0,11,0,0">
+            <Button x:Name="btnUltimo" Click="btnUltimo_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="5" Grid.Row="4" Margin="0,11,0,0">
                 <DockPanel>
                     <Image x:Name="imgUltimo"></Image>
                 </DockPanel>
