@@ -13,13 +13,13 @@ namespace IGraficaIES
         Divorciado = 3,
         Viudo = 4
     }
-    class ProfesorExtendido
+    public class ProfesorExtendido
     {
         private EstadCivil ecivil;
         private string email;
         private int peso;
         private int estatura;
-
+        private int id;
         public ProfesorExtendido()
         {
         }
@@ -27,9 +27,23 @@ namespace IGraficaIES
         {
             Estatura = estatura;
             Peso = peso;
-            Email = email;
+            ProfesorFuncionarioId = email;
             ECivil = eCivil;
         }
+        public ProfesorExtendido(int estatura, int peso, string email,int id, EstadCivil eCivil)
+        {
+            Estatura = estatura;
+            Peso = peso;
+            Id = id;
+            ProfesorFuncionarioId = email;
+            ECivil = eCivil;
+        }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
 
         public int Estatura
         {
@@ -44,7 +58,7 @@ namespace IGraficaIES
             set { peso = value; }
         }
 
-        public string Email
+        public string ProfesorFuncionarioId
         {
             get { return email; }
             set { email = value; }

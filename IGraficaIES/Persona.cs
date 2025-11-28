@@ -34,10 +34,16 @@ namespace _2HerenciaSimpleIES
             get { return nombre; }
             set { nombre = FormatearNombreApellido(value); }
         }
-        public string Email
+        public string Id
         {
             get { return email; }
-            set { email = generarEmail(); }
+            set 
+            {
+                if (value.EndsWith("trass.com"))
+                    email = value;
+                else 
+                    email = generarEmail(); 
+            }
         }
         public Persona() { }
         public Persona(int edad, string apellidos, string nombre)
@@ -45,7 +51,7 @@ namespace _2HerenciaSimpleIES
             Edad = edad;
             Apellidos = apellidos;
             Nombre = nombre;
-            Email = "x";
+            Id = "x";
         }
 
         public Persona(string rutaFoto, int edad, string apellidos, string nombre)
@@ -54,7 +60,7 @@ namespace _2HerenciaSimpleIES
             Edad = edad;
             Apellidos = apellidos;
             Nombre = nombre;
-            Email = "x";
+            Id = "x";
         }
 
         public override string ToString()

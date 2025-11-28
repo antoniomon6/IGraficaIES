@@ -1,5 +1,6 @@
 ﻿
 
+using System.Windows;
 using System.Windows.Controls;
 
 namespace _2HerenciaSimpleIES
@@ -20,13 +21,29 @@ namespace _2HerenciaSimpleIES
         {
             return list.Remove(personaBuscada);
         }
-        public static void On(this Button b)
+        public static void Habilitar(this IEnumerable<UIElement> lista)
+        {
+            foreach (UIElement element in lista)
+            {
+                element.IsEnabled = true;
+            }
+        }
+        public static void Deshabilitar(this IEnumerable<UIElement> lista)
+        {
+            foreach (UIElement element in lista)
+            {
+                element.IsEnabled = false;
+            }
+        }
+        
+        public static void On(this UIElement b)
         {
             b.IsEnabled = true;
         }
-        public static void Off(this Button b)
+        public static void Off(this UIElement b)
         {
             b.IsEnabled = false;
         }
+        
     }
 }

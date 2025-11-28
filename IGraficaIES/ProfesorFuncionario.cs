@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGraficaIES;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,13 +28,14 @@ namespace _2HerenciaSimpleIES
             set { tipoMedico = value; }
         }
 
+        public ProfesorExtendido ProfesorExtendido { get; set; }
         public ProfesorFuncionario()
         {
         }
         public ProfesorFuncionario(int edad, string apellidos, string nombre) : base(edad, apellidos, nombre)
         {
         }
-                                   
+
         public ProfesorFuncionario(string nombre,
                                    string apellidos,
                                    int edad,
@@ -50,7 +52,7 @@ namespace _2HerenciaSimpleIES
             TipoMedico = tipoMedico;
         }
 
-        public ProfesorFuncionario(string nombre,  
+        public ProfesorFuncionario(string nombre,
                                    string apellidos,
                                    int edad,
                                    string materia,
@@ -65,13 +67,12 @@ namespace _2HerenciaSimpleIES
             DestinoDefinitivo = definitivo;
             AnyoIngresoCuerpo = anyoIngreso;
             TipoMedico = tipoMedico;
-            
+
         }
 
         public ProfesorFuncionario(string rutaFoto, int edad, string apellidos, string nombre) : base(rutaFoto, edad, apellidos, nombre)
         {
         }
-
         public int GetSexenios()
         {
             return (DateTime.Today.Year - AnyoIngresoCuerpo) / 6;

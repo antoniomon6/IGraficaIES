@@ -41,10 +41,10 @@
                     <MenuItem Header="_Cursiva" IsCheckable="True"
                         Checked="Cursiva_Checked"
                         Unchecked="Cursiva_Unchecked">
-                            <MenuItem.Icon>
-                                <Image x:Name="menuCursiva"/>
-                            </MenuItem.Icon>
-                     </MenuItem>
+                        <MenuItem.Icon>
+                            <Image x:Name="menuCursiva"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem x:Name="menuFiltros" Header="F_iltros">
                     <MenuItem Click ="Filtro1_Click" Header="Edad mayor de 35 (nombre, apellidos, edad y materia)"/>
@@ -66,7 +66,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                
+
             </Menu>
         </StackPanel>
 
@@ -88,15 +88,15 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
-            
-            
-            
+
+
+
             <!-- Fila 1-->
-            
+
             <!--Columna 0 -->
-            <Label VerticalAlignment="Bottom" Margin="0,0,0,0" Name="lblNombre" Grid.Row="1" Grid.Column="0" Content="Nombre:"/>
-            <Label VerticalAlignment="Bottom" Margin="0,0,0,35" Name="lblApellidos" Grid.Row="1" Grid.Column="0" Content="Apellidos:"/>
-            
+            <Label VerticalAlignment="Bottom" Margin="0,0,0,35" Name="lblNombre" Grid.Row="1" Grid.Column="0" Content="Nombre:"/>
+            <Label VerticalAlignment="Bottom" Margin="0,0,0,0" Name="lblApellidos" Grid.Row="1" Grid.Column="0" Content="Apellidos:"/>
+
             <!--Columna 1 -->
             <TextBox x:Name="txtNombre" 
                       VerticalAlignment="Bottom" Margin="0,0,0,40" 
@@ -107,6 +107,7 @@
                       VerticalAlignment="Bottom" Margin="0,0,0,5" 
                       Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
                       HorizontalAlignment="Left" 
+                      LostFocus="txtApellidos_LostFocus"
                       Width="200" />
 
             <!--Columna 3 -->
@@ -123,8 +124,20 @@
                       Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
                       Margin="20,0,0,30" Content="Destino Definitivo"/>
+            <!--Columna 5-->
+            <Label Grid.Column="5"   Grid.Row="1" HorizontalAlignment="Left" 
+VerticalAlignment="Center" Width="50" Height="52" Margin="0,0,0,0" >
+                <TextBlock Name="lblRutaFoto" TextWrapping="Wrap" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Narrow" FontSize="13" Grid.ColumnSpan="2" Visibility="Hidden">
+                    Ruta foto
+                </TextBlock>
+            </Label>
             
+
             <!--Columna 6-->
+            <!--Añado un Tag Opcional para los campos que no son obligatorios-->
+            <TextBox x:Name="txtRutaFoto" Tag="Opcional" Grid.Column="6"  Grid.Row="1" 
+HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Center" Width="90"
+              FontFamily="Arial" FontStyle="Italic" Visibility="Hidden"  />
             <Image x:Name="imgFoto" 
                    Grid.Column="6" Grid.Row="1" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -144,7 +157,7 @@
                       Width="40"/>
 
             <!--Columna 2 -->
-            <Label  Name="lblAnioIngreso" 
+            <Label  Name="lblAnioIngreso" Tag="Numero"
                     VerticalAlignment="top" HorizontalAlignment="Left" 
                     Grid.Row="3" Grid.Column="2" 
                     Content="Año Ingreso:"/>
@@ -162,7 +175,7 @@
                        Content="Tipo funcionario:"/>
                 <RadioButton x:Name="rbEnPracticas" GroupName="TipoFuncionario" Content="En Prácticas"/>
                 <RadioButton x:Name="rbDeCarrera" GroupName="TipoFuncionario" Content="De Carrera"/>
-        
+
 
             </StackPanel>
             <!--Columna 5-->
@@ -195,22 +208,72 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnPrimero" Click="btnPrimero_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="1" Grid.Row="4" Margin="0,11,0,0">
+            <Button x:Name="btnPrimero" Click="btnPrimero_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="1" Grid.Row="4" Margin="0,11,0,0"
+                        ToolTip="Primero"
+                        ToolTipService.ShowOnDisabled="True">
                 <DockPanel>
                     <Image x:Name="imgPrimero"></Image>
                 </DockPanel>
             </Button>
-            <Button x:Name="btnAnterior" Click="btnAnterior_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="2" Grid.Row="4" Margin="0,11,0,0">
+            <Button x:Name="btnAnterior" Click="btnAnterior_Click" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="2" Grid.Row="4" Margin="0,11,0,0"
+                        ToolTip="Anterior"
+                        ToolTipService.ShowOnDisabled="True">
                 <DockPanel>
                     <Image x:Name="imgAnterior"></Image>
                 </DockPanel>
             </Button>
-            <Button x:Name="btnSiguiente" Click="btnSiguiente_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="4" Grid.Row="4" Margin="0,11,0,0">
+            <StackPanel x:Name="stkCUDPorfesor" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="45,0,0,0">
+                <Button x:Name="btnAnadir" Click="btnAnadir_Click" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="40" Margin="0,11,0,0"
+                        ToolTip="Añadir"
+                        ToolTipService.ShowOnDisabled="True">
+                    <DockPanel>
+                        <Image x:Name="imgAnadir"></Image>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="btnModificar" Click="btnModificar_Click" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="40" Margin="0,11,0,0"
+                        ToolTip="Modificar"
+                        ToolTipService.ShowOnDisabled="True">
+                    <DockPanel>
+                        <Image x:Name="imgModificar"></Image>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="btnEliminar" Click="btnEliminar_Click" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="40" Margin="0,11,0,0"
+                        ToolTip="Eliminar"
+                        ToolTipService.ShowOnDisabled="True">
+                    <DockPanel>
+                        <Image x:Name="imgEliminar"></Image>
+                    </DockPanel>
+                </Button>
+
+            </StackPanel>
+            <StackPanel x:Name="stkCancelarGuardar" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="btnCancelar" Click="btnCancelar_Click" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="40" Margin="0,11,0,0"
+                        ToolTip="Cancelar"
+                        ToolTipService.ShowOnDisabled="True">
+                    <DockPanel>
+                        <Image x:Name="imgCancelar"></Image>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="btnGuardar" Click="btnGuardar_Click" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="40" Margin="0,11,0,0"
+                        ToolTip="Guardar"
+                        ToolTipService.ShowOnDisabled="True">
+                    <DockPanel>
+                        <Image x:Name="imgGuardar"></Image>
+                    </DockPanel>
+                </Button>
+
+
+            </StackPanel>
+            <Button x:Name="btnSiguiente" Click="btnSiguiente_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="4" Grid.Row="4" Margin="0,11,0,0"
+                        ToolTip="Siguiente"
+                        ToolTipService.ShowOnDisabled="True">
                 <DockPanel>
                     <Image x:Name="imgSiguiente"></Image>
                 </DockPanel>
             </Button>
-            <Button x:Name="btnUltimo" Click="btnUltimo_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="5" Grid.Row="4" Margin="0,11,0,0">
+            <Button x:Name="btnUltimo" Click="btnUltimo_Click" HorizontalAlignment="Right" Height="40" VerticalAlignment="Top" Width="40" Grid.Column="5" Grid.Row="4" Margin="0,11,0,0"
+                        ToolTip="Ultimo"
+                        ToolTipService.ShowOnDisabled="True">
                 <DockPanel>
                     <Image x:Name="imgUltimo"></Image>
                 </DockPanel>
