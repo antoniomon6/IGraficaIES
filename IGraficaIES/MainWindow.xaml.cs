@@ -208,6 +208,7 @@ namespace IGraficaIES
             ControlLista(this, profActual, profesores.Count);
             RellenarDatos(profesores[profActual], this);
         }
+        // Metodos para los botones con funcion CRUD
         public void btnAnadir_Click(object sender, RoutedEventArgs e)
         {
             estado = EstadoAPP.Inserccion;
@@ -233,8 +234,10 @@ namespace IGraficaIES
             BorrarDatos(profesores[profActual]);
             profesores.Remove(profesores[profActual]);
             profActual = 0;
+            // Controlo si despues de borrar sigo teniendo elementos en la lista, en caso de no tener vuelvo al estado incial
             if (profesores.Count == 0)
             {
+                estado = EstadoAPP.SinCargar;
                 Deshabilitar([gridCent, menuFiltros, menuAgrupacion, gridBtn]);
                 btnAnadir.On();
                 BorrarCampos(this);
@@ -254,6 +257,7 @@ namespace IGraficaIES
             MessageBoxResult result = MessageBox.Show("¿Está seguro de que desea Cancelar la operación?", "FILTRAR POR Edad", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
+                // Controlo si tengo elementos en la lista  si no los tengo devuelvo la app al estado inicial
                 if (profesores.Count != 0)
                 {
                     // Habilito lo que anteriormente deshabilite
@@ -266,6 +270,7 @@ namespace IGraficaIES
                 }
                 else
                 {
+                    estado = EstadoAPP.SinCargar;
                     Deshabilitar([gridCent, menuFiltros, menuAgrupacion, gridBtn]);
                     btnAnadir.On();
                     BorrarCampos(this);
@@ -277,18 +282,19 @@ namespace IGraficaIES
         public void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             string controlErroneo;
-            if (CheckCampos(this, out controlErroneo))
+            if (CheckCampos(controlesGridCentral, out controlErroneo))
             {
-                // TODO Comprobar si el estado de la ventana y cambiar funciones;
+                
                 ProfesorFuncionario p = new ProfesorFuncionario(txtNombre.Text,
                                     txtApellidos.Text,
                                     Int32.Parse(cmbEdad.SelectedValue.ToString()),
                                     "",
-                                    Enum.Parse<TipoFuncionario>(((bool)rbDeCarrera.IsChecked ? rbDeCarrera : rbEnPracticas).Name.Substring(2)),
+                                    Enum.Parse<TipoFuncionario>(((bool)rdbDeCarrera.IsChecked ? rdbDeCarrera : rdbEnPracticas).Name.Substring(3)),
                                     Int32.Parse(txtAnioIngreso.Text),
                                     (bool)chkDestino.IsChecked,
                                     lsbSegMedico.SelectedValue == "Muface" ? TipoMed.Muface : TipoMed.SeguridadSocial,
-                                    "");
+                                    txtRutaFoto.Text);
+                // Compruebo el estado de la app para diferenciar entre Inserccion y modificacion
                 switch (estado)
                 {
                     case EstadoAPP.Inserccion:
@@ -310,6 +316,7 @@ namespace IGraficaIES
                 MessageBox.Show("No has introducido un " + controlErroneo + " valido", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        // Metodo para rellenar el campo de email cuando el usuario rellena el campo de apellidos
         private void txtApellidos_LostFocus(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtApellidos.Text) && !string.IsNullOrWhiteSpace(txtNombre.Text))

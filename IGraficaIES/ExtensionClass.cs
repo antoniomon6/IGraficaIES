@@ -14,8 +14,19 @@ namespace _2HerenciaSimpleIES
         }
         public static string FirstLetterToUpper(this String str)
         {
-            str = str.Trim();   
-            return str[0].ToString().ToUpper()+str.Substring(1).ToLower();
+            if (str != null)
+            {
+                str = str.Trim();
+                if (str.Length == 1)
+                {
+                    str = str.ToUpper();
+                }
+                else
+                {
+                    str = str[0].ToString().ToUpper() + str.Substring(1).ToLower();
+                }
+            }
+            return str;
         }
         public static bool SeekRemove(this List<Persona> list, Persona personaBuscada)
         {
@@ -35,7 +46,7 @@ namespace _2HerenciaSimpleIES
                 element.IsEnabled = false;
             }
         }
-        
+
         public static void On(this UIElement b)
         {
             b.IsEnabled = true;
@@ -44,6 +55,6 @@ namespace _2HerenciaSimpleIES
         {
             b.IsEnabled = false;
         }
-        
+
     }
 }

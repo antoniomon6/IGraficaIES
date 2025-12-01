@@ -126,8 +126,10 @@
                       Margin="20,0,0,30" Content="Destino Definitivo"/>
             <!--Columna 5-->
             <Label Grid.Column="5"   Grid.Row="1" HorizontalAlignment="Left" 
-VerticalAlignment="Center" Width="50" Height="52" Margin="0,0,0,0" >
-                <TextBlock Name="lblRutaFoto" TextWrapping="Wrap" FontStyle="Normal" FontStretch="Normal" FontFamily="Arial Narrow" FontSize="13" Grid.ColumnSpan="2" Visibility="Hidden">
+                   VerticalAlignment="Center" Width="50" Height="52" Margin="0,0,0,0" >
+                <TextBlock Name="lblRutaFoto" TextWrapping="Wrap" FontStyle="Normal" 
+                           FontStretch="Normal" FontFamily="Arial Narrow" FontSize="13" 
+                           Grid.ColumnSpan="2" Visibility="Hidden">
                     Ruta foto
                 </TextBlock>
             </Label>
@@ -135,9 +137,11 @@ VerticalAlignment="Center" Width="50" Height="52" Margin="0,0,0,0" >
 
             <!--Columna 6-->
             <!--Añado un Tag Opcional para los campos que no son obligatorios-->
-            <TextBox x:Name="txtRutaFoto" Tag="Opcional" Grid.Column="6"  Grid.Row="1" 
-HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Center" Width="90"
-              FontFamily="Arial" FontStyle="Italic" Visibility="Hidden"  />
+            <TextBox x:Name="txtRutaFoto" Tag="OpcionalArchivo" 
+                     Grid.Column="6"  Grid.Row="1" 
+                     HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" 
+                     VerticalAlignment="Center" Width="90"
+                     FontFamily="Arial" FontStyle="Italic" Visibility="Hidden"  />
             <Image x:Name="imgFoto" 
                    Grid.Column="6" Grid.Row="1" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -157,24 +161,26 @@ HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Ce
                       Width="40"/>
 
             <!--Columna 2 -->
-            <Label  Name="lblAnioIngreso" Tag="Numero"
+            <Label  Name="lblAnioIngreso" 
                     VerticalAlignment="top" HorizontalAlignment="Left" 
                     Grid.Row="3" Grid.Column="2" 
                     Content="Año Ingreso:"/>
             <!--Columna 3 -->
-            <TextBox x:Name="txtAnioIngreso" 
+            <!--Añado un Tag Numero para los campos que son Numeros y necesitan Parseo-->
+            <TextBox x:Name="txtAnioIngreso"  Tag="Numero"
                      VerticalAlignment="Top" Margin="0,5,0,0" 
                      Grid.Row="3" Grid.Column="3"
                      HorizontalAlignment="Left" 
                      Width="60" />
-            <StackPanel  x:Name="stkTipo" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
+            <StackPanel x:Name="stkTipo" 
+                        Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2"
                         HorizontalAlignment="Center" VerticalAlignment="Top"
                         Width="auto" Margin="10,0,0,0"
                         Height="auto">
                 <Label Name="lblTipoFuncionario"
                        Content="Tipo funcionario:"/>
-                <RadioButton x:Name="rbEnPracticas" GroupName="TipoFuncionario" Content="En Prácticas"/>
-                <RadioButton x:Name="rbDeCarrera" GroupName="TipoFuncionario" Content="De Carrera"/>
+                <RadioButton x:Name="rdbEnPracticas" GroupName="TipoFuncionario" Content="En Prácticas"/>
+                <RadioButton x:Name="rdbDeCarrera" GroupName="TipoFuncionario" Content="De Carrera"/>
 
 
             </StackPanel>
