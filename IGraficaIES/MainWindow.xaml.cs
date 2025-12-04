@@ -73,7 +73,7 @@ namespace IGraficaIES
             CargarImagen(ref menuCursiva, "format_italic.png");
             CargarImagen(ref menuEstatura, "straighten.png");
             CargarImagen(ref menuMedico, "local.png");
-
+            Console.WriteLine(estado);
         }
         public void Abrir_Click(object sender, RoutedEventArgs e)
         {
@@ -82,7 +82,6 @@ namespace IGraficaIES
             {
                 profesores = ObternerLista<ProfesorFuncionario>();
                 profesoresEx = ObternerLista<ProfesorExtendido>();
-
             }
             else
             {
@@ -133,7 +132,6 @@ namespace IGraficaIES
                             }
 
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -157,6 +155,7 @@ namespace IGraficaIES
                 ProfesorFuncionario p = (ProfesorFuncionario)profesores[profActual];
                 RellenarDatos(p, this);
             }
+            Console.WriteLine(estado);
         }
         public void Salir_Click(object sender, RoutedEventArgs e)
         {
@@ -217,7 +216,6 @@ namespace IGraficaIES
             controlesGridBotones.Deshabilitar();
             Habilitar([btnCancelar, btnGuardar, gridCent]);
             txtEmail.Off();
-
         }
         public void btnModificar_Click(object sender, RoutedEventArgs e)
         {
@@ -226,7 +224,6 @@ namespace IGraficaIES
             controlesGridBotones.Deshabilitar();
             Habilitar([btnCancelar, btnGuardar, gridCent]);
             Deshabilitar([txtNombre, txtApellidos, txtEmail]);
-
         }
         public void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -246,8 +243,8 @@ namespace IGraficaIES
             {
                 
                 RellenarDatos(profesores[profActual], this);
-                ControlLista(this, profActual, profesores.Count);
                 MessageBox.Show("La operacion de borrado ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                ControlLista(this, profActual, profesores.Count);
 
             }
 
@@ -308,8 +305,8 @@ namespace IGraficaIES
                         break;
                 }
                 RellenarDatos(profesores[profActual], this);
-                ControlLista(this, profActual, profesores.Count);
                 MessageBox.Show("La operacion de " + estado.ToString() + " ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                ControlLista(this, profActual, profesores.Count);
             }
             else
             {

@@ -163,7 +163,6 @@ namespace IGraficaIES
                 // A los controles desde el XAML se le pueden añadir etiquetas
                 // He usado esto para controlar cuando un campo es opcional o un textBox es un numero
                 bool esOpcional = tag.Contains("Opcional");
-                bool esArchivo = tag.Contains("Archivo");
                 bool esNumero = tag.Contains("Numero");
 
                 // Compruebo si la bandera sigue siendo valida
@@ -195,11 +194,6 @@ namespace IGraficaIES
                         if (esNumero)
                         {
                             valido = Int32.TryParse(txt.Text, out int resul);
-                        }
-                        // Con esto compruebo si es un campo de archivo que el archivo exista y no haya puesto una ruta que NO es valida
-                        else if (esArchivo)
-                        {
-                            valido = File.Exists(rutaFija + txt.Text);
                         }
                         else
                         {
@@ -307,7 +301,7 @@ namespace IGraficaIES
             }
             catch (Exception)
             {
-                MessageBox.Show("No se ha encontrado el archivo de imagen", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                img.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "No_imagen_disponible.gif") as ImageSource;
             }
 
         }
