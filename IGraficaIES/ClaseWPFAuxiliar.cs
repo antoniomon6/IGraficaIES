@@ -120,7 +120,7 @@ namespace IGraficaIES
             return cadena;
         }
         // Metodo Reflection para Grupos genericos
-        public static string CrearStringMensaje<TClave, TValor>(IEnumerable<IGrouping<TClave, TValor>> grupoProfesores, bool mostrarPropiedadAgrupada)
+        public static string CrearStringMensaje<TClave, TValor>(IEnumerable<IGrouping<TClave, TValor>> grupoProfesores, bool mostrarPropiedadAgrupada = false)
         {
             StringBuilder sb = new StringBuilder();
             System.Reflection.PropertyInfo[] listaPropiedades = typeof(TValor).GetProperties();

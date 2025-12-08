@@ -44,7 +44,6 @@ namespace IGraficaIES
             set { id = value; }
         }
 
-
         public int Estatura
         {
             get { return estatura; }

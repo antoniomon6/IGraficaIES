@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IGraficaIES.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20251124095337_creacion")]
+    [Migration("20251205091723_creacion")]
     partial class creacion
     {
         /// <inheritdoc />

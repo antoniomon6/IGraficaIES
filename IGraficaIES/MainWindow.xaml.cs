@@ -107,6 +107,7 @@ namespace IGraficaIES
                             //Diferencio entre profesores con y sin foto
                             if (split.Length == 9)
                             {
+                                Console.WriteLine("sinfoto");
                                 profesores.Add(new ProfesorFuncionario(split[0],
                                     split[1],
                                     Int32.Parse(split[2]),
@@ -139,6 +140,7 @@ namespace IGraficaIES
                         MessageBox.Show("No se ha podido leer el archivo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         Console.WriteLine("Error en la lectura del fichero: " + openFileDialog.FileName);
                     }
+                    profesoresEx = ProfesorExtendido.CrearListaProfesores();
                     InsertarDatos(ref profesores);
                     InsertarDatos(ref profesoresEx);
 
