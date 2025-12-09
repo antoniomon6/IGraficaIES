@@ -107,15 +107,15 @@ namespace IGraficaIES
                             //Diferencio entre profesores con y sin foto
                             if (split.Length == 9)
                             {
-                                Console.WriteLine("sinfoto");
                                 profesores.Add(new ProfesorFuncionario(split[0],
                                     split[1],
                                     Int32.Parse(split[2]),
                                     split[4],
-                                    (TipoFuncionario)Int32.Parse(split[5]),
+                                    split[5] == "De Carrera" ? TipoFuncionario.DeCarrera : split[5] == "En Practicas" ? TipoFuncionario.EnPracticas : TipoFuncionario.Interino,
                                     Int32.Parse(split[6]),
                                     split[7] == "true",
-                                    (TipoMed)Int32.Parse(split[8]))
+                                    split[8] == "SS" ? TipoMed.SeguridadSocial : TipoMed.Muface
+                                    )
                                 );
                             }
                             else
@@ -133,17 +133,17 @@ namespace IGraficaIES
                             }
 
                         }
+                        profesoresEx = ProfesorExtendido.CrearListaProfesores();
+                        InsertarDatos(ref profesores);
+                        InsertarDatos(ref profesoresEx);
                     }
                     catch (Exception ex)
                     {
+                        profesores.Clear();
                         //Mensajes de error en caso de no poder leer bien el fichero
-                        MessageBox.Show("No se ha podido leer el archivo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Mensaje("No se ha podido leer el archivo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         Console.WriteLine("Error en la lectura del fichero: " + openFileDialog.FileName);
                     }
-                    profesoresEx = ProfesorExtendido.CrearListaProfesores();
-                    InsertarDatos(ref profesores);
-                    InsertarDatos(ref profesoresEx);
-
                 }
 
             }
@@ -230,8 +230,13 @@ namespace IGraficaIES
         public void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             estado = EstadoAPP.Eliminacion;
-            BorrarDatos(profesores[profActual]);
-            profesores.Remove(profesores[profActual]);
+            ProfesorFuncionario p = profesores[profActual];
+            BorrarDatos(p);
+            profesores.Remove(p);
+            // Borrado en cascada en la lista 
+            ProfesorExtendido pex = new ProfesorExtendido();
+            pex.ProfesorFuncionarioId = p.Id;
+            profesoresEx.Remove(pex);
             profActual = 0;
             // Controlo si despues de borrar sigo teniendo elementos en la lista, en caso de no tener vuelvo al estado incial
             if (profesores.Count == 0)
@@ -245,7 +250,7 @@ namespace IGraficaIES
             {
                 
                 RellenarDatos(profesores[profActual], this);
-                MessageBox.Show("La operacion de borrado ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                Mensaje("La operacion de borrado ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
                 ControlLista(this, profActual, profesores.Count);
 
             }
@@ -253,12 +258,13 @@ namespace IGraficaIES
         }
         public void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("¿Está seguro de que desea Cancelar la operación?", "FILTRAR POR Edad", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            MessageBoxResult result = Mensaje("¿Está seguro de que desea Cancelar la operación?", "FILTRAR POR Edad", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
                 // Controlo si tengo elementos en la lista  si no los tengo devuelvo la app al estado inicial
                 if (profesores.Count != 0)
                 {
+                    profActual = 0;
                     // Habilito lo que anteriormente deshabilite
                     Habilitar([menuFiltros, menuAgrupacion, gridBtn]);
                     // Relleno los datos del primero de la lista y deshabilito los botones necesarios Con un metodo de extension nuevo
@@ -299,20 +305,20 @@ namespace IGraficaIES
                     case EstadoAPP.Inserccion:
                         profesores.Add(p);
                         InsertarDatos(p);
-                        profActual = profesores.IndexOf(p);
                         break;
                     case EstadoAPP.Modificacion:
                         ModificarDatos(p);
                         profesores = ObternerLista<ProfesorFuncionario>();
                         break;
                 }
+                profActual = 0;
                 RellenarDatos(profesores[profActual], this);
-                MessageBox.Show("La operacion de " + estado.ToString() + " ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
+                Mensaje("La operacion de " + estado.ToString() + " ha tenido exito", "Informacion", MessageBoxButton.OK, MessageBoxImage.Information);
                 ControlLista(this, profActual, profesores.Count);
             }
             else
             {
-                MessageBox.Show("No has introducido un " + controlErroneo + " valido", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Mensaje("No has introducido un " + controlErroneo + " valido", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         // Metodo para rellenar el campo de email cuando el usuario rellena el campo de apellidos
@@ -337,7 +343,7 @@ namespace IGraficaIES
                     x.Materia
                 });
             string salida = CrearStringMensaje(mayoresDe35);
-            MessageBox.Show(salida, "FILTRAR POR Edad", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "FILTRAR POR Edad", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Filtro2_Click(object sender, RoutedEventArgs e)
         {
@@ -346,7 +352,7 @@ namespace IGraficaIES
                 .Select(x => x);
             string salida = CrearStringMensaje(posteriorIgualA2010);
 
-            MessageBox.Show(salida, "FILTRAR POR Año de Ingreso", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "FILTRAR POR Año de Ingreso", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Filtro3_Click(object sender, RoutedEventArgs e)
         {
@@ -365,7 +371,7 @@ namespace IGraficaIES
                 .Where(x => x.ECivil == EstadCivil.Casado);
             string salida = CrearStringMensaje(anyo2010YCasado);
 
-            MessageBox.Show(salida, "FILTRAR POR Año de Ingreso Y Estado Civil", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "FILTRAR POR Año de Ingreso Y Estado Civil", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Filtro4_Click(object sender, RoutedEventArgs e)
         {
@@ -386,7 +392,7 @@ namespace IGraficaIES
                 .ThenByDescending(x => x.Peso);
             string salida = CrearStringMensaje(Estatura160);
 
-            MessageBox.Show(salida, "FILTRAR POR Estatura", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "FILTRAR POR Estatura", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         //Agrupaciones
         public void Agrupacion1_Click(object sender, RoutedEventArgs e)
@@ -405,7 +411,7 @@ namespace IGraficaIES
                     px.ECivil
                 }).GroupBy(x => x.ECivil);
             string salida = CrearStringMensaje(gruposEcivil, false);
-            MessageBox.Show(salida, "AGRUPAR POR Estado Civil", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "AGRUPAR POR Estado Civil", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Agrupacion2_Click(object sender, RoutedEventArgs e)
         {
@@ -417,7 +423,7 @@ namespace IGraficaIES
                    Total = p.Count()
                });
             string salida = CrearStringMensaje(gruposEcivilCuenta);
-            MessageBox.Show(salida, "AGRUPAR POR Estado Civil con Contador", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "AGRUPAR POR Estado Civil con Contador", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Agrupacion3_Click(object sender, RoutedEventArgs e)
         {
@@ -432,7 +438,7 @@ namespace IGraficaIES
                .OrderByDescending(x => x.Edad)
                .GroupBy(x => x.Madurez);
             string salida = CrearStringMensaje(gruposEcivilCuenta, false);
-            MessageBox.Show(salida, "AGRUPAR POR Madurez", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "AGRUPAR POR Madurez", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         public void Agrupacion4_Click(object sender, RoutedEventArgs e)
         {
@@ -452,7 +458,7 @@ namespace IGraficaIES
                 .ThenBy(x => x.Apellidos)
                 .GroupBy(x => x.TipoMedico);
             string salida = CrearStringMensaje(gruposSMedico, true);
-            MessageBox.Show(salida, "AGRUPAR POR Seguro Medico", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mensaje(salida, "AGRUPAR POR Seguro Medico", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
     }

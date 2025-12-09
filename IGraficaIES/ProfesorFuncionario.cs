@@ -100,5 +100,11 @@ namespace _2HerenciaSimpleIES
                 definitivo ? "SI".PadRight(20) : "NO".PadRight(20),
                 tipoMedico.ToString().PadRight(20));
         }
+        public override bool Equals(object? obj)
+        {
+
+            return (obj is ProfesorFuncionario funcionario &&
+                   Id == funcionario.Id);
+        }
     }
 }

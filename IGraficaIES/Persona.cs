@@ -7,7 +7,7 @@ namespace _2HerenciaSimpleIES
         private int edad;
         private string nombre;
         private string apellidos;
-        private string email;
+        private string id;
         private string rutaFoto;
 
         public string RutaFoto
@@ -36,13 +36,13 @@ namespace _2HerenciaSimpleIES
         }
         public string Id
         {
-            get { return email; }
+            get { return id; }
             set 
             {
                 if (value.EndsWith("trass.com"))
-                    email = value;
+                    id = value;
                 else 
-                    email = generarEmail(); 
+                    id = generarEmail(); 
             }
         }
         public Persona() { }
@@ -52,6 +52,7 @@ namespace _2HerenciaSimpleIES
             Apellidos = apellidos;
             Nombre = nombre;
             Id = "x";
+            rutaFoto = "";
         }
 
         public Persona(string rutaFoto, int edad, string apellidos, string nombre)
@@ -68,7 +69,7 @@ namespace _2HerenciaSimpleIES
             return string.Format("{0}{1}{2}{3}",
                 nombre.PadRight(25),
                 apellidos.PadRight(30),
-                email.PadRight(25),
+                id.PadRight(25),
                 edad.ToString().PadRight(10));
         }
 
@@ -78,12 +79,12 @@ namespace _2HerenciaSimpleIES
                    edad == persona.edad &&
                    nombre == persona.nombre &&
                    apellidos == persona.apellidos &&
-                   email == persona.email;
+                   id == persona.id;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(edad, nombre, apellidos, email);
+            return HashCode.Combine(edad, nombre, apellidos, id);
         }
 
         public static bool operator >(Persona p1, Persona p2) => p1.Edad > p2.Edad;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2HerenciaSimpleIES;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -107,6 +108,12 @@ namespace IGraficaIES
             return listaProfesores;
         }
 
+        public override bool Equals(object? obj)
+        {
+
+            return (obj is ProfesorExtendido extendido &&
+                   ProfesorFuncionarioId == extendido.ProfesorFuncionarioId);
+        }
 
     }
 }

@@ -27,6 +27,11 @@ namespace IGraficaIES
             Modificacion = 3,
             Eliminacion = 4
         }
+        // Metodo para mostrar un mensaje
+        public static MessageBoxResult Mensaje(string descripcion, string titulo, MessageBoxButton boton, MessageBoxImage icono)
+        {
+            return MessageBox.Show(descripcion,titulo,boton,icono);
+        }
 
         // Metodo que recibe una lista y habilita todos sus elementos
         public static void Habilitar(IEnumerable<UIElement> lista)
